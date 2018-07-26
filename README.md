@@ -1,6 +1,14 @@
 # jupyterlab_sublime
 
-Sublime notebook cell binding for JupyterLab
+A slightly opinionated Sublime notebook cell binding for JupyterLab.
+
+## Notes
+
+Most of the keybindings implemented by CodeMirror just work out of the box after switching the key map, there were a little pesky keys that collide either with my system level shortcuts, broswer shortcuts or jupyterlab shortcuts. I have adapted a few keybindings I find the most useful, more to follow soon. Consult the [checklist](sublimeKeyChecklist.md) for more details.
+
+## Why opinionated?
+
+There are some keybindings I simply don't feel useful, so I have repurposed them, again see the [checklist](sublimeKeyChecklist.md).
 
 
 ## Prerequisites
