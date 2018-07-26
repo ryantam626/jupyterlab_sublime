@@ -1,6 +1,7 @@
 UNRELEASED
 ----------
 
+* Correct license in `package.json`;
 
 0.1.0 2018-07-26
 ----------------
