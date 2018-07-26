@@ -18,7 +18,7 @@ There are some keybindings I simply don't feel useful, so I have repurposed them
 ## Installation
 
 ```bash
-jupyter labextension install jupyterlab_sublime
+jupyter labextension install @ryantam626/jupyterlab_sublime
 ```
 
 ## Development
