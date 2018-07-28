@@ -128,6 +128,20 @@ class JupyterLabSublime {
       selector: ".CodeMirror-focused",
     });
 
+    commands.addCommand("sublime:subword-backward-deletion", {
+      execute: () => {
+        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor).editor;
+        console.log('t');
+        console.log(cEditor.getDoc().getCursor());
+      },
+      label: "Subward backward deletion",
+    });
+    commands.addKeyBinding({
+      command: "sublime:subword-backward-deletion",
+      keys: ["Alt Backspace"],
+      selector: ".CodeMirror-focused",
+    });
+
   }
 
   private onAcitveCellChanged(): void {
