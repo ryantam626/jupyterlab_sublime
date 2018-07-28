@@ -1,5 +1,8 @@
 # jupyterlab_sublime
 
+[![npm version](https://badge.fury.io/js/%40ryantam626%2Fjupyterlab_sublime.svg)](https://badge.fury.io/js/%40ryantam626%2Fjupyterlab_sublime)
+[![npm downloads](https://img.shields.io/npm/dw/%40ryantam626%2Fjupyterlab_sublime.svg)](https://badge.fury.io/js/%40ryantam626%2Fjupyterlab_sublime)
+
 A slightly opinionated Sublime notebook cell binding for JupyterLab.
 
 ## Notes
