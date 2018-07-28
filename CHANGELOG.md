@@ -6,6 +6,7 @@ UNRELEASED
 * Implement subword deletion commands;
 * Add npm badges;
 * Add notes about my keys;
+* Bump dependencies ranges;
 
 0.1.0 2018-07-26
 ----------------

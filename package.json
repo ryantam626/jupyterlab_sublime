@@ -30,8 +30,8 @@
     "prepare": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.16.0",
-    "@jupyterlab/notebook": "^0.16.3",
+    "@jupyterlab/application": ">=0.16.0 <0.18.0",
+    "@jupyterlab/notebook": ">=0.16.0 <0.18.0",
     "@types/codemirror": "0.0.58"
   },
   "devDependencies": {
