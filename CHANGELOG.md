@@ -7,6 +7,7 @@ UNRELEASED
 * Add npm badges;
 * Add notes about my keys;
 * Bump dependencies ranges;
+* Use absolute links in README;
 
 0.1.0 2018-07-26
 ----------------
