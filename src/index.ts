@@ -128,6 +128,77 @@ class JupyterLabSublime {
       selector: ".CodeMirror-focused",
     });
 
+    commands.addCommand("sublime:subword-backward-deletion", {
+      execute: () => {
+        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor).editor;
+        const doc = cEditor.getDoc();
+        const starts = doc.listSelections();
+        // NOTE: This is non-trivial to deal with, results are often ugly, let's ignore this.
+        if (starts.some((pos) => (pos.head.ch !== pos.anchor.ch))) {
+          // tslint:disable-next-line:no-console
+          console.log("Ignored attempt to delete subword!");
+          return;
+        }
+        // CAV: To make sure when we undo this operation, we have carets showing in
+        //      their rightful positions.
+        cEditor.execCommand("goSubwordLeft");
+        const ends = doc.listSelections();
+        doc.setSelections(starts);
+        if (starts.length !== ends.length) {
+          // NOTE: Edge case where select are part of the same subword, need more thoughts on this.)
+          // tslint:disable-next-line:no-console
+          console.log("Inogred attempt to delete subword, because some selection is part of the same subword");
+          return;
+        }
+        cEditor.operation(() => {
+          for (let i = 0; i < starts.length; i++) {
+            doc.replaceRange("", starts[i].head, ends[i].head, "+delete");
+          }
+        });
+      },
+      label: "Subward backward deletion",
+    });
+    commands.addKeyBinding({
+      command: "sublime:subword-backward-deletion",
+      keys: ["Alt Backspace"],
+      selector: ".CodeMirror-focused",
+    });
+
+    commands.addCommand("sublime:subword-forward-deletion", {
+      execute: () => {
+        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor).editor;
+        const doc = cEditor.getDoc();
+        const starts = doc.listSelections();
+        // NOTE: This is non-trivial to deal with, results are often ugly, let's ignore this.
+        if (starts.some((pos) => (pos.head.ch !== pos.anchor.ch))) {
+          // tslint:disable-next-line:no-console
+          console.log("Ignored attempt to delete subword!");
+          return;
+        }
+        // CAV: To make sure when we undo this operation, we have carets showing in
+        //      their rightful positions.
+        cEditor.execCommand("goSubwordRight");
+        const ends = doc.listSelections();
+        doc.setSelections(starts);
+        if (starts.length !== ends.length) {
+          // NOTE: Edge case where select are part of the same subword, need more thoughts on this.)
+          // tslint:disable-next-line:no-console
+          console.log("Inogred attempt to delete subword, because some selection is part of the same subword");
+          return;
+        }
+        cEditor.operation(() => {
+          for (let i = 0; i < starts.length; i++) {
+            doc.replaceRange("", starts[i].head, ends[i].head, "+delete");
+          }
+        });
+      },
+      label: "Subward forward deletion",
+    });
+    commands.addKeyBinding({
+      command: "sublime:subword-forward-deletion",
+      keys: ["Alt Delete"],
+      selector: ".CodeMirror-focused",
+    });
   }
 
   private onAcitveCellChanged(): void {
@@ -143,9 +214,9 @@ class JupyterLabSublime {
  */
 const extension: JupyterLabPlugin<void> = {
   activate: (app: JupyterLab, tracker: INotebookTracker) => {
-    // tslint:disable:no-unused-expression
+    // tslint:disable-next-line:no-unused-expression
     new JupyterLabSublime(app, tracker);
-    // tslint:disable:no-console
+    // tslint:disable-next-line:no-console
     console.log("JupyterLab extension jupyterlab_sublime is activated!");
   },
   autoStart: true,
