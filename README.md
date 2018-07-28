@@ -13,6 +13,7 @@ Most of the keybindings implemented by CodeMirror just work out of the box after
 
 There are some keybindings I simply don't feel useful, so I have repurposed them, again see the [checklist](sublimeKeyChecklist.md).
 
+Also I have implemented some extra commands which might collide with other user's shortcuts, see [my list](myKeys.md).
 
 ## Prerequisites
 

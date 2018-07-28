@@ -5,6 +5,7 @@ UNRELEASED
 * Correct tslint disable scope;
 * Implement subword deletion commands;
 * Add npm badges;
+* Add notes about my keys;
 
 0.1.0 2018-07-26
 ----------------
