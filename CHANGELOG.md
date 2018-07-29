@@ -1,6 +1,10 @@
 UNRELEASED
 ----------
 
+
+0.1.1 2018-07-29
+----------------
+
 * Correct license in `package.json`;
 * Correct tslint disable scope;
 * Implement subword deletion commands;
