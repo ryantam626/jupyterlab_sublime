@@ -1,6 +1,11 @@
 UNRELEASED
 ----------
 
+0.1.3 2018-08-19
+----------------
+
+* Better Mac support (Accel key vs Ctrl key) - courtesy of randy3k;
+
 0.1.2 2018-08-19
 ----------------
 
