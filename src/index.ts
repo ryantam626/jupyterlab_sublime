@@ -12,6 +12,8 @@ import {
 
 import "../style/index.css";
 
+const IS_MAC = !!navigator.platform.match(/Mac/i);
+
 class JupyterLabSublime {
 
   private tracker: INotebookTracker;
@@ -70,11 +72,20 @@ class JupyterLabSublime {
       },
       label: "Split selection by line",
     });
-    commands.addKeyBinding({
-      command: "sublime:split-selection-by-lLine",
-      keys: ["Ctrl Shift L"],
-      selector: ".CodeMirror-focused",
-    });
+    if (IS_MAC) {
+       commands.addKeyBinding({
+         command: "sublime:split-selection-by-lLine",
+         keys: ["Accel Shift L"],
+         selector: ".CodeMirror-focused",
+       });
+    } else {
+      commands.addKeyBinding({
+        command: "sublime:split-selection-by-lLine",
+        keys: ["Ctrl Shift L"],
+        selector: ".CodeMirror-focused",
+      });
+    }
+
 
     // Manage Ctrl-M collision
     commands.addCommand("sublime:go-to-bracket", {
@@ -96,11 +107,19 @@ class JupyterLabSublime {
       },
       label: "Duplicate line",
     });
-    commands.addKeyBinding({
-      command: "sublime:duplicate-line",
-      keys: ["Ctrl Shift D"],
-      selector: ".CodeMirror-focused",
-    });
+    if (IS_MAC) {
+      commands.addKeyBinding({
+        command: "sublime:duplicate-line",
+        keys: ["Accel Shift D"],
+        selector: ".CodeMirror-focused",
+      });
+    } else {
+      commands.addKeyBinding({
+        command: "sublime:duplicate-line",
+        keys: ["Ctrl Shift D"],
+        selector: ".CodeMirror-focused",
+      });
+    }
 
     // Repurpose Ctrl-Up
     commands.addCommand("sublime:add-cursor-to-prev-line", {
