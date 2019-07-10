@@ -1,5 +1,5 @@
 import {
-  JupyterLab, JupyterLabPlugin,
+    JupyterFrontEnd, JupyterFrontEndPlugin,
 } from "@jupyterlab/application";
 
 import {
@@ -17,9 +17,9 @@ const IS_MAC = !!navigator.platform.match(/Mac/i);
 class JupyterLabSublime {
 
   private tracker: INotebookTracker;
-  private app: JupyterLab;
+  private app: JupyterFrontEnd;
 
-  constructor(app: JupyterLab, tracker: INotebookTracker) {
+  constructor(app: JupyterFrontEnd, tracker: INotebookTracker) {
     this.app = app;
     this.tracker = tracker;
     this.addCommands();
@@ -85,7 +85,6 @@ class JupyterLabSublime {
         selector: ".CodeMirror-focused",
       });
     }
-
 
     // Manage Ctrl-M collision
     commands.addCommand("sublime:go-to-bracket", {
@@ -231,8 +230,8 @@ class JupyterLabSublime {
 /**
  * Initialization data for the jupyterlab_sublime extension.
  */
-const extension: JupyterLabPlugin<void> = {
-  activate: (app: JupyterLab, tracker: INotebookTracker) => {
+const extension: JupyterFrontEndPlugin<void> = {
+  activate: (app: JupyterFrontEnd, tracker: INotebookTracker) => {
     // tslint:disable-next-line:no-unused-expression
     new JupyterLabSublime(app, tracker);
     // tslint:disable-next-line:no-console
