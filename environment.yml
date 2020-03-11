@@ -4,3 +4,4 @@ channels:
 dependencies:
   - jupyterlab==2.0.0
   - nodejs
+  - jq
