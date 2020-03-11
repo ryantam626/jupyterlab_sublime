@@ -1,21 +1,17 @@
 import {
-    JupyterFrontEnd, JupyterFrontEndPlugin,
-} from "@jupyterlab/application";
+  JupyterFrontEnd,
+  JupyterFrontEndPlugin
+} from '@jupyterlab/application';
 
-import {
-  INotebookTracker,
-} from "@jupyterlab/notebook";
+import { INotebookTracker } from '@jupyterlab/notebook';
 
-import {
-  CodeMirrorEditor,
-} from "@jupyterlab/codemirror";
+import { CodeMirrorEditor } from '@jupyterlab/codemirror';
 
-import "../style/index.css";
+import '../style/index.css';
 
 const IS_MAC = !!navigator.platform.match(/Mac/i);
 
 class JupyterLabSublime {
-
   private tracker: INotebookTracker;
   private app: JupyterFrontEnd;
 
@@ -31,198 +27,210 @@ class JupyterLabSublime {
     const { commands } = this.app;
     const self = this;
     function editorExec(id: string) {
-      (self.tracker.activeCell.editor as CodeMirrorEditor).editor.execCommand(id);
+      (self.tracker.activeCell.editor as CodeMirrorEditor).editor.execCommand(
+        id
+      );
     }
     // Manage Escape collision
     // TODO: Check if use has Escape set for command mode
-    commands.addCommand("sublime:exit-editor", {
+    commands.addCommand('sublime:exit-editor', {
       execute: () => {
-        editorExec("singleSelectionTop");
-        commands.execute("notebook:enter-command-mode");
+        editorExec('singleSelectionTop');
+        commands.execute('notebook:enter-command-mode');
       },
-      label: "Exit Editor",
+      label: 'Exit Editor'
     });
     commands.addKeyBinding({
-      command: "sublime:exit-editor",
-      keys: ["Escape"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:exit-editor',
+      keys: ['Escape'],
+      selector: '.CodeMirror-focused'
     });
 
     // Manage Shift-Tab collision
-    commands.addCommand("sublime:indent-less-slash-tooltip", {
+    commands.addCommand('sublime:indent-less-slash-tooltip', {
       execute: () => {
-        if (!this.tracker.activeCell.editor.host.classList.contains("jp-mod-completer-enabled")) {
-          editorExec("indentLess");
+        if (
+          !this.tracker.activeCell.editor.host.classList.contains(
+            'jp-mod-completer-enabled'
+          )
+        ) {
+          editorExec('indentLess');
         } else {
-          commands.execute("tooltip:launch-notebook");
+          commands.execute('tooltip:launch-notebook');
         }
       },
-      label: "Indent less or tooltip",
+      label: 'Indent less or tooltip'
     });
     commands.addKeyBinding({
-      command: "sublime:indent-less-slash-tooltip",
-      keys: ["Shift Tab"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:indent-less-slash-tooltip',
+      keys: ['Shift Tab'],
+      selector: '.CodeMirror-focused'
     });
 
     // Manage Shift-Ctr-L collision
-    commands.addCommand("sublime:split-selection-by-lLine", {
+    commands.addCommand('sublime:split-selection-by-lLine', {
       execute: () => {
-        editorExec("splitSelectionByLine");
+        editorExec('splitSelectionByLine');
       },
-      label: "Split selection by line",
+      label: 'Split selection by line'
     });
     if (IS_MAC) {
-       commands.addKeyBinding({
-         command: "sublime:split-selection-by-lLine",
-         keys: ["Accel Shift L"],
-         selector: ".CodeMirror-focused",
-       });
+      commands.addKeyBinding({
+        command: 'sublime:split-selection-by-lLine',
+        keys: ['Accel Shift L'],
+        selector: '.CodeMirror-focused'
+      });
     } else {
       commands.addKeyBinding({
-        command: "sublime:split-selection-by-lLine",
-        keys: ["Ctrl Shift L"],
-        selector: ".CodeMirror-focused",
+        command: 'sublime:split-selection-by-lLine',
+        keys: ['Ctrl Shift L'],
+        selector: '.CodeMirror-focused'
       });
     }
 
     // Manage Ctrl-M collision
-    commands.addCommand("sublime:go-to-bracket", {
+    commands.addCommand('sublime:go-to-bracket', {
       execute: () => {
-        editorExec("goToBracket");
+        editorExec('goToBracket');
       },
-      label: "Go to bracket",
+      label: 'Go to bracket'
     });
     commands.addKeyBinding({
-      command: "sublime:go-to-bracket",
-      keys: ["Ctrl M"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:go-to-bracket',
+      keys: ['Ctrl M'],
+      selector: '.CodeMirror-focused'
     });
 
     // Manage Shift-Ctrl-D collision
-    commands.addCommand("sublime:duplicate-line", {
+    commands.addCommand('sublime:duplicate-line', {
       execute: () => {
-        editorExec("duplicateLine");
+        editorExec('duplicateLine');
       },
-      label: "Duplicate line",
+      label: 'Duplicate line'
     });
     if (IS_MAC) {
       commands.addKeyBinding({
-        command: "sublime:duplicate-line",
-        keys: ["Accel Shift D"],
-        selector: ".CodeMirror-focused",
+        command: 'sublime:duplicate-line',
+        keys: ['Accel Shift D'],
+        selector: '.CodeMirror-focused'
       });
     } else {
       commands.addKeyBinding({
-        command: "sublime:duplicate-line",
-        keys: ["Ctrl Shift D"],
-        selector: ".CodeMirror-focused",
+        command: 'sublime:duplicate-line',
+        keys: ['Ctrl Shift D'],
+        selector: '.CodeMirror-focused'
       });
     }
 
     // Repurpose Ctrl-Up
-    commands.addCommand("sublime:add-cursor-to-prev-line", {
+    commands.addCommand('sublime:add-cursor-to-prev-line', {
       execute: () => {
-        editorExec("addCursorToPrevLine");
+        editorExec('addCursorToPrevLine');
       },
-      label: "Add cursor to previous line",
+      label: 'Add cursor to previous line'
     });
     commands.addKeyBinding({
-      command: "sublime:add-cursor-to-prev-line",
-      keys: ["Ctrl ArrowUp"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:add-cursor-to-prev-line',
+      keys: ['Ctrl ArrowUp'],
+      selector: '.CodeMirror-focused'
     });
 
     // Repurpose Ctrl-Down
-    commands.addCommand("sublime:add-cursor-to-next-line", {
+    commands.addCommand('sublime:add-cursor-to-next-line', {
       execute: () => {
-        editorExec("addCursorToNextLine");
+        editorExec('addCursorToNextLine');
       },
-      label: "Add cursor to next line",
+      label: 'Add cursor to next line'
     });
     commands.addKeyBinding({
-      command: "sublime:add-cursor-to-next-line",
-      keys: ["Ctrl ArrowDown"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:add-cursor-to-next-line',
+      keys: ['Ctrl ArrowDown'],
+      selector: '.CodeMirror-focused'
     });
 
-    commands.addCommand("sublime:subword-backward-deletion", {
+    commands.addCommand('sublime:subword-backward-deletion', {
       execute: () => {
-        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor).editor;
+        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor)
+          .editor;
         const doc = cEditor.getDoc();
         const starts = doc.listSelections();
         // NOTE: This is non-trivial to deal with, results are often ugly, let's ignore this.
-        if (starts.some((pos) => (pos.head.ch !== pos.anchor.ch))) {
+        if (starts.some(pos => pos.head.ch !== pos.anchor.ch)) {
           // tslint:disable-next-line:no-console
-          console.log("Ignored attempt to delete subword!");
+          console.log('Ignored attempt to delete subword!');
           return;
         }
         // CAV: To make sure when we undo this operation, we have carets showing in
         //      their rightful positions.
-        cEditor.execCommand("goSubwordLeft");
+        cEditor.execCommand('goSubwordLeft');
         const ends = doc.listSelections();
         doc.setSelections(starts);
         if (starts.length !== ends.length) {
           // NOTE: Edge case where select are part of the same subword, need more thoughts on this.)
           // tslint:disable-next-line:no-console
-          console.log("Inogred attempt to delete subword, because some selection is part of the same subword");
+          console.log(
+            'Inogred attempt to delete subword, because some selection is part of the same subword'
+          );
           return;
         }
         cEditor.operation(() => {
           for (let i = 0; i < starts.length; i++) {
-            doc.replaceRange("", starts[i].head, ends[i].head, "+delete");
+            doc.replaceRange('', starts[i].head, ends[i].head, '+delete');
           }
         });
       },
-      label: "Subward backward deletion",
+      label: 'Subward backward deletion'
     });
     commands.addKeyBinding({
-      command: "sublime:subword-backward-deletion",
-      keys: ["Alt Backspace"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:subword-backward-deletion',
+      keys: ['Alt Backspace'],
+      selector: '.CodeMirror-focused'
     });
 
-    commands.addCommand("sublime:subword-forward-deletion", {
+    commands.addCommand('sublime:subword-forward-deletion', {
       execute: () => {
-        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor).editor;
+        const cEditor = (this.tracker.activeCell.editor as CodeMirrorEditor)
+          .editor;
         const doc = cEditor.getDoc();
         const starts = doc.listSelections();
         // NOTE: This is non-trivial to deal with, results are often ugly, let's ignore this.
-        if (starts.some((pos) => (pos.head.ch !== pos.anchor.ch))) {
+        if (starts.some(pos => pos.head.ch !== pos.anchor.ch)) {
           // tslint:disable-next-line:no-console
-          console.log("Ignored attempt to delete subword!");
+          console.log('Ignored attempt to delete subword!');
           return;
         }
         // CAV: To make sure when we undo this operation, we have carets showing in
         //      their rightful positions.
-        cEditor.execCommand("goSubwordRight");
+        cEditor.execCommand('goSubwordRight');
         const ends = doc.listSelections();
         doc.setSelections(starts);
         if (starts.length !== ends.length) {
           // NOTE: Edge case where select are part of the same subword, need more thoughts on this.)
           // tslint:disable-next-line:no-console
-          console.log("Inogred attempt to delete subword, because some selection is part of the same subword");
+          console.log(
+            'Inogred attempt to delete subword, because some selection is part of the same subword'
+          );
           return;
         }
         cEditor.operation(() => {
           for (let i = 0; i < starts.length; i++) {
-            doc.replaceRange("", starts[i].head, ends[i].head, "+delete");
+            doc.replaceRange('', starts[i].head, ends[i].head, '+delete');
           }
         });
       },
-      label: "Subward forward deletion",
+      label: 'Subward forward deletion'
     });
     commands.addKeyBinding({
-      command: "sublime:subword-forward-deletion",
-      keys: ["Alt Delete"],
-      selector: ".CodeMirror-focused",
+      command: 'sublime:subword-forward-deletion',
+      keys: ['Alt Delete'],
+      selector: '.CodeMirror-focused'
     });
   }
 
   private onAcitveCellChanged(): void {
     const activeCell = this.tracker.activeCell;
     if (activeCell !== null) {
-      (activeCell.editor as CodeMirrorEditor).setOption("keyMap", "sublime");
+      (activeCell.editor as CodeMirrorEditor).setOption('keyMap', 'sublime');
     }
   }
 }
@@ -235,11 +243,11 @@ const extension: JupyterFrontEndPlugin<void> = {
     // tslint:disable-next-line:no-unused-expression
     new JupyterLabSublime(app, tracker);
     // tslint:disable-next-line:no-console
-    console.log("JupyterLab extension jupyterlab_sublime is activated!");
+    console.log('JupyterLab extension jupyterlab_sublime is activated!');
   },
   autoStart: true,
-  id: "jupyterlab_sublime",
-  requires: [INotebookTracker],
+  id: 'jupyterlab_sublime',
+  requires: [INotebookTracker]
 };
 
 export default extension;
