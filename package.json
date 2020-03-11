@@ -26,18 +26,23 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "watch": "tsc -w",
-    "prepare": "npm run clean && npm run build"
+    "format": "tslint --fix src/*.ts",
+    "lint": "tslint src/*.ts",
+    "prepare": "npm run clean && npm run build",
+    "watch": "tsc -w"
   },
   "dependencies": {
-    "@jupyterlab/application": "^1.0.1",
-    "@jupyterlab/notebook": "^1.0.1",
+    "@jupyterlab/application": "^2.0.0",
+    "@jupyterlab/notebook": "^2.0.0",
     "@types/codemirror": "0.0.76"
   },
   "devDependencies": {
-    "rimraf": "^2.6.1",
-    "tslint": "^5.11.0",
-    "typescript": "~3.5.1"
+    "rimraf": "^3.0.2",
+    "prettier": "^1.19.1",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.8.3"
   },
   "jupyterlab": {
     "extension": true
