@@ -10,7 +10,7 @@ if [ "${unique_versions_count}" = 1 ] \
   && [ ! -z "${LABEXTENSION_VERSION}" ]
 then
    echo "Versions seem fine."
-   export PUBLISH_VERSION="v${CHANGELOG_VERSION}"
+   export PUBLISH_VERSION="v${LABEXTENSION_VERSION}"
 else
    echo "Versions don't match."
    echo "Lab extension version:    ${LABEXTENSION_VERSION}"
