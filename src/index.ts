@@ -17,8 +17,8 @@ class JupyterLabSublime {
     this.app = app;
     this.tracker = tracker;
     this.addCommands();
-    this.onAcitveCellChanged();
-    this.tracker.activeCellChanged.connect(this.onAcitveCellChanged, this);
+    this.onActiveCellChanged();
+    this.tracker.activeCellChanged.connect(this.onActiveCellChanged, this);
   }
 
   private addCommands() {
@@ -209,7 +209,7 @@ class JupyterLabSublime {
     });
   }
 
-  private onAcitveCellChanged(): void {
+  private onActiveCellChanged(): void {
     const activeCell = this.tracker.activeCell;
     if (activeCell !== null) {
       (activeCell.editor as CodeMirrorEditor).setOption('keyMap', 'sublime');
