@@ -44,6 +44,19 @@ class JupyterLabSublime {
       selector: '.CodeMirror-focused'
     });
 
+    // Manage Ctrl-/ collision
+    commands.addCommand('sublime:toggle-comment-indented', {
+      execute: () => {
+        editorExec('toggleCommentIndented');
+      },
+      label: 'Split selection by line'
+    });
+    commands.addKeyBinding({
+      command: 'sublime:toggle-comment-indented',
+      keys: ['Accel /'],
+      selector: '.CodeMirror-focused'
+    });
+
     // Manage Shift-Tab collision
     commands.addCommand('sublime:indent-less-slash-tooltip', {
       execute: () => {
