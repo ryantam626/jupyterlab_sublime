@@ -1,6 +1,6 @@
 {
   "name": "@ryantam626/jupyterlab_sublime",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Sublime notebook cell binding for JupyterLab",
   "keywords": [
     "jupyter",
