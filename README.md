@@ -21,24 +21,25 @@ Also I have implemented some extra commands which might collide with other user'
 
 ## Installation
 
+For Jupyter Lab >= 3,
+```bash
+pip install jupyterlab_sublime
+```
+
+For Jupyter Lab < 3,
+
 ```bash
 jupyter labextension install @ryantam626/jupyterlab_sublime
 ```
 
 ## Development
 
-For a development install (requires npm version 4 or later), do the following in the repository directory:
+This is untested... But should work.
 
 ```bash
-npm install
-npm run build
-jupyter labextension link .
-```
-
-To rebuild the package and the JupyterLab app:
-
-```bash
-npm run build
-jupyter lab build
+make conda-install-frozen
+. ./start_env.sh
+make dev-install
+jupyter lab
 ```
 
