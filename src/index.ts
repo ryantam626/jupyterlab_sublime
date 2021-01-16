@@ -23,9 +23,12 @@ class JupyterLabSublime {
 
   private addCommands() {
     const { commands } = this.app;
-    const editor = this.tracker.activeCell.editor as CodeMirrorEditor;
+    // tslint:disable-next-line
+    const self = this;
     function editorExec(id: string) {
-      editor.editor.execCommand(id);
+      (self.tracker.activeCell.editor as CodeMirrorEditor).editor.execCommand(
+        id
+      );
     }
     // Manage Escape collision
     // TODO: Check if use has Escape set for command mode
