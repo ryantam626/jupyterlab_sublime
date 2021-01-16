@@ -19,19 +19,14 @@ conda-freeze:  ## Use conda to freeze the current env available
 conda-install-frozen:  ## Use conda to install dev dependencies using pinned env specification - subject to repodata.json changes
 	conda env create -f environment-frozen.yml --force --name jupyterlab-sublime
 
-dev-install:  ## Use npm to install the lab extension in dev mode
-	cd $(LABEXTENSION_PATH)
-	npm install
-	npm run build
-	jupyter labextension link .
-	cd -
+dev-install:
+	pip install -e .
+	jupyter labextension develop . --overwrite
+	jlpm run build
 
 dev-watch-labextension:  ## Recompile labextension on changes
 	cd $(LABEXTENSION_PATH)
 	npm run watch
-
-dev-watch-jupyterlab:  ## Start jupyterlab under watch mode
-	jupyter lab --watch
 
 lint:  # Run linters
 	cd $(LABEXTENSION_PATH)
